@@ -20,6 +20,8 @@ namespace HW8_1.Models
         [StringLength(100)]
         public string aName { get; set; }
 
+        [Required]
+        [RestrictedDate]
         [Column(TypeName = "date")]
         public DateTime DOB { get; set; }
 

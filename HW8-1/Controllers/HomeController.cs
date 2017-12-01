@@ -1,6 +1,7 @@
 ﻿using HW8_1.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -16,11 +17,21 @@ namespace HW8_1.Controllers
             return View();
         }
 
-        // GET: Art
-        public ActionResult Artists()
+
+
+
+
+        public ActionResult Get(string keyG)
         {
-            return View(db.Artists.ToList());
+            var keyG2 = Convert.ToInt32(keyG);
+            List<string> arts = new List<string>();
+            arts = db.Artworks.Where(s => db.Classifications.Where(a => a.idG == keyG2).Select(d => d.idA).ToList().Contains(s.id)).Select(f => f.aName).ToList();
+                
+            return Json(arts, JsonRequestBehavior.AllowGet);
         }
+
+
+
 
         // GET: Artists
         public ActionResult Artworks()
